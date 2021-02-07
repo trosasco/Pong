@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -57,16 +54,18 @@ public class BallController : MonoBehaviour
             Debug.Log(score2 + " - " + score1);
             if (score1 > 10)
             {
-                Debug.Log("Right Paddle Wins, GAMEOVER!");
+                Debug.Log("Right Paddle Wins, GAME OVER!");
                 score1 = 0;
                 score2 = 0;
+                Debug.Log("Score reset to 0 - 0.");
             }
 
             if (score2 > 10)
             {
-                Debug.Log("Left paddle wins I guess.");
+                Debug.Log("Left Paddle Wins, GAME OVER!");
                 score1 = 0;
                 score2 = 0;
+                Debug.Log("Score reset to 0 - 0.");
             }
             
             resetBall();

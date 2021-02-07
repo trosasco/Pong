@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PaddleController : MonoBehaviour
@@ -14,17 +12,18 @@ public class PaddleController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("key set");
+        //Debug.Log("key set");
     }
 
     // Update is called once per frame
     void Update()
     {
-        //Updating variables to locational values
+        //Create variables for positions
         float x = transform.position.x;
         float y = transform.position.y;
         float z = transform.position.z;
-        //Checking if variable x is past limit
+        
+        //Checking if variable x is past wall limit
         if (x > limit)
         {
             //Repositioning paddle to limited x range
@@ -37,6 +36,7 @@ public class PaddleController : MonoBehaviour
         
         //Setting key variable to axis to move paddles
         key = Input.GetAxis(input);
+        
         //When key is being pressed
         if (key != 0)
         {
