@@ -8,6 +8,8 @@ public class BallController : MonoBehaviour
 {
     private Rigidbody rb;
     private int direction = 1;
+    private int score1 = 0;
+    private int score2 = 0;
     private float speed = 100;
     private float baseSpeed;
     
@@ -29,23 +31,51 @@ public class BallController : MonoBehaviour
     //If ball hits a paddle, reverse direction
     private void OnCollisionEnter(Collision other)
     {
+        //If ball hits a paddle
         if (other.gameObject.tag == "Player")
         {
             direction = direction * -1;
             speed = speed + 25f;
             float angle = transform.position.x - other.gameObject.transform.position.x;
          
+            rb.AddForce(new Vector3(rb.velocity.x, rb.velocity.y,rb.velocity.z*-2));
             pushBall(angle);   
         }
 
+        //If ball hits a goal
         if (other.gameObject.tag == "Finish")
         {
+            if (direction == 1)
+            {
+                score1 += 1;
+                Debug.Log("Right Paddle Scored");
+            } else if (direction == -1)
+            {
+                score2 += 1;
+                Debug.Log("Left Paddle Scored");
+            }
+            Debug.Log(score2 + " - " + score1);
+            if (score1 > 10)
+            {
+                Debug.Log("Right Paddle Wins, GAMEOVER!");
+                score1 = 0;
+                score2 = 0;
+            }
+
+            if (score2 > 10)
+            {
+                Debug.Log("Left paddle wins I guess.");
+                score1 = 0;
+                score2 = 0;
+            }
+            
             resetBall();
         }
 
+        //If ball hits a wall
         if (other.gameObject.tag == "Wall")
         {
-            rb.AddForce(rb.velocity*-2);
+            rb.AddForce(new Vector3(rb.velocity.x*-2, rb.velocity.y,rb.velocity.z));
         }
     }
 
