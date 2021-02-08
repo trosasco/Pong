@@ -41,10 +41,7 @@ public class BallController : MonoBehaviour
                 direction = 1;
                 pushBall(angle);  
             }
-            
-            //rb.AddForce(new Vector3(rb.velocity.x, rb.velocity.y,rb.velocity.z*-2));
- 
-            
+
         }
 
         //If ball hits a goal
