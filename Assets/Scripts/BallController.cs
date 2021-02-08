@@ -97,7 +97,6 @@ public class BallController : MonoBehaviour
     private void pushBall(float angle)
     {
         Vector3 v3 = new Vector3(-angle,0,direction);
-        Debug.Log("Push " + direction  + " Speed " + speed);
         rb.velocity = Vector3.zero;
         rb.AddForce(v3 * speed);
     }
@@ -107,7 +106,6 @@ public class BallController : MonoBehaviour
         float angle = Random.Range(-1f, 1f) * 10f;
         
         Vector3 v3 = new Vector3(angle,0,direction * speed);
-        Debug.Log("pushball #1 " + direction + " " + speed);
         rb.AddForce(v3);
     }
 }
