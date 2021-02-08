@@ -3,11 +3,14 @@ using Random = UnityEngine.Random;
 
 public class BallController : MonoBehaviour
 {
+    public Object leftPaddle;
+    public Object rightPaddle;
+    
     private Rigidbody rb;
     private int direction = 1;
     private int score1 = 0;
     private int score2 = 0;
-    private float speed = 100;
+    private float speed = 180;
     private float baseSpeed;
     
     // Start is called before the first frame update
@@ -18,25 +21,30 @@ public class BallController : MonoBehaviour
         pushBall();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        //rb.velocity = (Vector3.forward * direction * speed);
-
-    }
-    
     //If ball hits a paddle, reverse direction
     private void OnCollisionEnter(Collision other)
     {
         //If ball hits a paddle
         if (other.gameObject.tag == "Player")
         {
-            direction = direction * -1;
-            speed = speed + 25f;
+            speed = speed + 40f;
             float angle = transform.position.x - other.gameObject.transform.position.x;
-         
-            rb.AddForce(new Vector3(rb.velocity.x, rb.velocity.y,rb.velocity.z*-2));
-            pushBall(angle);   
+
+            if (other.gameObject.Equals(leftPaddle))
+            {
+                direction = -1;
+                pushBall(angle);  
+            }
+
+            if (other.gameObject.Equals(rightPaddle))
+            {
+                direction = 1;
+                pushBall(angle);  
+            }
+            
+            //rb.AddForce(new Vector3(rb.velocity.x, rb.velocity.y,rb.velocity.z*-2));
+ 
+            
         }
 
         //If ball hits a goal
@@ -88,15 +96,18 @@ public class BallController : MonoBehaviour
 
     private void pushBall(float angle)
     {
-        Vector3 v3 = new Vector3(angle,0,0);
-        rb.AddForce(Vector3.forward * direction * speed + (v3*speed));
+        Vector3 v3 = new Vector3(-angle,0,direction);
+        Debug.Log("Push " + direction  + " Speed " + speed);
+        rb.velocity = Vector3.zero;
+        rb.AddForce(v3 * speed);
     }
 
     private void pushBall()
     {
-        float angle = Random.Range(-1f, 1f);
+        float angle = Random.Range(-1f, 1f) * 10f;
         
-        Vector3 v3 = new Vector3(angle,0,0);
-        rb.AddForce(Vector3.forward * direction * speed + (v3*speed));
+        Vector3 v3 = new Vector3(angle,0,direction * speed);
+        Debug.Log("pushball #1 " + direction + " " + speed);
+        rb.AddForce(v3);
     }
 }
