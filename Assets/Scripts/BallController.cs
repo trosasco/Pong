@@ -1,10 +1,16 @@
+using System;
 using UnityEngine;
+using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
 
 public class BallController : MonoBehaviour
 {
     public Object leftPaddle;
     public Object rightPaddle;
+
+    public AudioClip metalSound;
+    public AudioClip wallSound;
+    private AudioSource source;
     
     private Rigidbody rb;
     private int direction = 1;
@@ -16,6 +22,9 @@ public class BallController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        source = GetComponent<AudioSource>();
+        
+        
         baseSpeed = speed;
         rb = GetComponent<Rigidbody>();
         pushBall();
@@ -27,7 +36,14 @@ public class BallController : MonoBehaviour
         //If ball hits a paddle
         if (other.gameObject.tag == "Player")
         {
+            //Increase ball speed when it hits a paddle
             speed = speed + 40f;
+            
+            //Change pitch of sound depending on speed
+            source.clip = metalSound;
+            source.pitch = (Math.Abs(rb.velocity.z) / 10);
+            source.Play();
+            
             float angle = transform.position.x - other.gameObject.transform.position.x;
 
             if (other.gameObject.Equals(leftPaddle))
@@ -79,6 +95,11 @@ public class BallController : MonoBehaviour
         //If ball hits a wall
         if (other.gameObject.tag == "Wall")
         {
+            //Change pitch of sound based on velocity
+            source.clip = wallSound;
+            source.pitch = (Math.Abs(rb.velocity.z) / 10);
+            source.Play();
+            
             rb.AddForce(new Vector3(rb.velocity.x*-2, rb.velocity.y,rb.velocity.z));
         }
     }
