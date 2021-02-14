@@ -526,6 +526,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 438760853}
+  - component: {fileID: 438760854}
   m_Layer: 0
   m_Name: Board
   m_TagString: Untagged
@@ -556,6 +557,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &438760854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 438760852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e14d2938c7159944eb8216dfa9cf7584, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  powerUp: {fileID: 7446387581061014445, guid: 0e8cd03befccfb4468e92ef8d265b2c0, type: 3}
+  spawnTime: 12
 --- !u!1 &474177419
 GameObject:
   m_ObjectHideFlags: 0
@@ -780,7 +795,7 @@ GameObject:
   - component: {fileID: 485096300}
   m_Layer: 0
   m_Name: Ball
-  m_TagString: Untagged
+  m_TagString: Ball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
