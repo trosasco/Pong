@@ -1,7 +1,9 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
+using UnityEngine.UI;
 
 public class BallController : MonoBehaviour
 {
@@ -18,6 +20,12 @@ public class BallController : MonoBehaviour
     private int score2 = 0;
     private float speed = 180;
     private float baseSpeed;
+
+    public int scoreToWin = 11;
+    
+    public Text leftScore;
+    public Text rightScore;
+    public Text gameOver;
     
     // Start is called before the first frame update
     void Start()
@@ -73,22 +81,31 @@ public class BallController : MonoBehaviour
                 Debug.Log("Left Paddle Scored");
             }
             Debug.Log(score2 + " - " + score1);
-            if (score1 > 10)
+            if (score1 >= scoreToWin)
             {
+                gameOver.color = Color.green; 
+                gameOver.text = "Game over! Right paddle wins.";
+                StartCoroutine(showGameOver());
+                
                 Debug.Log("Right Paddle Wins, GAME OVER!");
                 score1 = 0;
                 score2 = 0;
                 Debug.Log("Score reset to 0 - 0.");
             }
 
-            if (score2 > 10)
+            if (score2 >= scoreToWin)
             {
                 Debug.Log("Left Paddle Wins, GAME OVER!");
+                gameOver.color = Color.green; 
+                gameOver.text = "Game over! Left paddle wins.";
+                StartCoroutine(showGameOver());
+                
                 score1 = 0;
                 score2 = 0;
                 Debug.Log("Score reset to 0 - 0.");
             }
             
+            updateScores();
             resetBall();
         }
 
@@ -125,5 +142,36 @@ public class BallController : MonoBehaviour
         
         Vector3 v3 = new Vector3(angle,0,direction * speed);
         rb.AddForce(v3);
+    }
+
+    private void updateScores()
+    {
+        leftScore.text = score1 + "";
+        rightScore.text = score2 + "";
+        //gameOver.text = "";
+
+        if (score2 > 3 && score2 < 9)
+        {
+            rightScore.color = new Color(200 / 255f, 18 / 255f, 18 / 255f);
+        } else if (score2 > 8 && score2 < 12)
+        {
+            rightScore.color = new Color(210 / 225f, 115 / 255f, 30 / 255f);
+        }
+
+        if (score1 > 3 && score1 < 9)
+        {
+            leftScore.color = new Color(200 / 255f, 18 / 255f, 18 / 255f);
+        } else if (score1 > 8 && score1 < 12)
+        {
+            leftScore.color = new Color(210 / 225f, 115 / 255f, 30 / 255f);
+        }
+
+    }
+
+    IEnumerator showGameOver()
+    {
+        gameOver.enabled = true;
+        yield return new WaitForSeconds(3f);
+        gameOver.enabled = false;
     }
 }
