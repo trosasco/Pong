@@ -172,6 +172,10 @@ public class BallController : MonoBehaviour
     {
         gameOver.enabled = true;
         yield return new WaitForSeconds(3f);
+
+        leftScore.color = new Color(23 / 255f, 117 / 255f, 154 / 255f);
+        rightScore.color = new Color(23 / 255f, 117 / 255f, 154 / 255f);
+        
         gameOver.enabled = false;
     }
 }

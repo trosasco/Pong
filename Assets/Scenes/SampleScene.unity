@@ -909,7 +909,7 @@ MonoBehaviour:
   rightPaddle: {fileID: 62253254}
   metalSound: {fileID: 8300000, guid: 5147d2feeed07da45bff5b9a3b980a40, type: 3}
   wallSound: {fileID: 8300000, guid: d679c722dd0972542b39451849a17e2d, type: 3}
-  scoreToWin: 3
+  scoreToWin: 11
   leftScore: {fileID: 1048596396}
   rightScore: {fileID: 1803196689}
   gameOver: {fileID: 1991710005}
